@@ -1,11 +1,8 @@
-[README_GITHUB_FULLY_COMPATIBLE.md](https://github.com/user-attachments/files/31934872/README_GITHUB_FULLY_COMPATIBLE.md)
 # Commodity Futures Spread Execution Optimization
 
 ## Overview
 
 This repository contains the research code developed for my ENSAE Paris professional thesis on **data-driven execution of commodity futures calendar spreads**.
-
-> **GitHub compatibility note:** all mathematical expressions in this README are written as plain text or inline code rather than LaTeX, so they render reliably in standard GitHub Markdown.
 
 The objective is not to predict the outright direction of a commodity. Instead, the project addresses a practical execution problem:
 
@@ -30,9 +27,9 @@ The code was developed in the context of a V.I.E. at **Société Générale, New
 For a calendar spread between two futures contracts, let
 
 
-```text
-S_t = F_t^(1) - F_t^(2)
-```
+$$
+S_t = F_t^{(1)} - F_t^{(2)}
+$$
 
 
 denote the observed spread at time `t`.
@@ -45,14 +42,14 @@ S_hat_T = f(X_t),
 ```
 
 
-where `X_t` contains market, liquidity and time-of-day information.
+where $X_t$ contains market, liquidity and time-of-day information.
 
 The difference between the current market level and the predicted settlement is then normalized by an intraday volatility estimate:
 
 
-```text
-z_t = (S_t - S_hat_T) / sigma_hat_t
-```
+$$
+z_t = \frac{S_t - \widehat{S}_T}{\widehat{\sigma}_t}
+$$
 
 
 This standardized signal is compared with the **historical distribution of z-scores observed at the same minute of the trading day**.
@@ -173,15 +170,19 @@ Main engineered variables:
 The cyclical time variables are defined as:
 
 
-```text
-minute_sin_t = sin(2 * pi * m_t / 1440)
-```
+Define the cyclical time variables as
 
+$$
+s_t = \sin\left(2\pi \frac{m_t}{1440}\right)
+$$
 
+and
 
-```text
-minute_cos_t = cos(2 * pi * m_t / 1440)
-```
+$$
+c_t = \cos\left(2\pi \frac{m_t}{1440}\right)
+$$
+
+where `s_t` corresponds to `minute_sin`, `c_t` corresponds to `minute_cos`, and `m_t` is the minute of the day.
 
 
 where `m_t` is the minute of the day.
@@ -205,12 +206,14 @@ TARGET = "Today_settlementPX_spread"
 The statistical problem is
 
 
-```text
-Y_t = S_T    and    Y_hat_t = f(X_t)
-```
+$$
+Y_t = S_T,
+\qquad
+\widehat{Y}_t = f(X_t)
+$$
 
 
-where `S_T` is the final settlement spread of the trading day.
+where $S_T$ is the final settlement spread of the trading day.
 
 ### Models
 
@@ -244,23 +247,39 @@ For each rolling window:
 The main metrics are:
 
 
-```text
-MAE = (1/n) * sum_{i=1}^n |y_i - y_hat_i|
-```
+$$
+\operatorname{MAE}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left|y_i-\widehat{y}_i\right|
+$$
 
 
-
-```text
-RMSE = sqrt[(1/n) * sum_{i=1}^n (y_i - y_hat_i)^2]
-```
+$$
+\operatorname{RMSE}
+=
+\sqrt{
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left(y_i-\widehat{y}_i\right)^2
+}
+$$
 
 
 and
 
 
-```text
-R^2 = 1 - sum_i (y_i - y_hat_i)^2 / sum_i (y_i - y_bar)^2
-```
+$$
+R^2
+=
+1-
+\frac{
+\sum_i \left(y_i-\widehat{y}_i\right)^2
+}{
+\sum_i \left(y_i-\bar{y}\right)^2
+}
+$$
 
 
 This time-series validation scheme is important because random cross-validation would allow future observations to contaminate the training sample.
@@ -335,9 +354,11 @@ z_MidvsSet_histo_q85
 Conceptually, for spread `s`, minute `m`, and quantile level `alpha`,
 
 
-```text
-q_hat(alpha, s, m) = inf { x : F_hat(s, m)(x) >= alpha }
-```
+$$
+\widehat{q}_{\alpha,s,m}
+=
+\inf \left\{ x \in \mathbb{R} : \widehat{F}_{s,m}(x) \ge \alpha \right\}
+$$
 
 
 The motivation is that the distribution of the spread-to-settlement signal is strongly time dependent. The execution thresholds are therefore conditioned on the minute of day rather than assumed constant throughout the session.
@@ -361,9 +382,9 @@ S_hat_T.
 The current spread is compared with that predicted terminal value through
 
 
-```text
-z_t = (S_t - S_hat_T) / sigma_hat_t
-```
+$$
+z_t = \frac{S_t - \widehat{S}_T}{\widehat{\sigma}_t}
+$$
 
 
 where `sigma_hat_t` is an intraday rolling volatility estimate.
