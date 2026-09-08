@@ -27,9 +27,7 @@ The code was developed in the context of a V.I.E. at **Société Générale, New
 For a calendar spread between two futures contracts, let
 
 
-$$
-S_t = F_t^{(1)} - F_t^{(2)}
-$$
+![Calendar spread definition](assets/spread_definition.png)
 
 
 denote the observed spread at time `t`.
@@ -37,19 +35,15 @@ denote the observed spread at time `t`.
 The model estimates the end-of-day settlement spread:
 
 
-```text
-S_hat_T = f(X_t),
-```
+![Settlement forecast](assets/settlement_forecast.png)
 
 
-where $X_t$ contains market, liquidity and time-of-day information.
+where `X_t` contains market, liquidity and time-of-day information.
 
 The difference between the current market level and the predicted settlement is then normalized by an intraday volatility estimate:
 
 
-$$
-z_t = \frac{S_t - \widehat{S}_T}{\widehat{\sigma}_t}
-$$
+![Standardized execution signal](assets/zscore_signal.png)
 
 
 This standardized signal is compared with the **historical distribution of z-scores observed at the same minute of the trading day**.
@@ -169,21 +163,9 @@ Main engineered variables:
 
 The cyclical time variables are defined as:
 
+![Cyclical sine time feature](assets/minute_sin.png)
 
-Define the cyclical time variables as
-
-$$
-s_t = \sin\left(2\pi \frac{m_t}{1440}\right)
-$$
-
-and
-
-$$
-c_t = \cos\left(2\pi \frac{m_t}{1440}\right)
-$$
-
-where `s_t` corresponds to `minute_sin`, `c_t` corresponds to `minute_cos`, and `m_t` is the minute of the day.
-
+![Cyclical cosine time feature](assets/minute_cos.png)
 
 where `m_t` is the minute of the day.
 
@@ -206,14 +188,10 @@ TARGET = "Today_settlementPX_spread"
 The statistical problem is
 
 
-$$
-Y_t = S_T,
-\qquad
-\widehat{Y}_t = f(X_t)
-$$
+![Forecasting target](assets/forecast_target.png)
 
 
-where $S_T$ is the final settlement spread of the trading day.
+where `S_T` is the final settlement spread of the trading day.
 
 ### Models
 
@@ -247,39 +225,16 @@ For each rolling window:
 The main metrics are:
 
 
-$$
-\operatorname{MAE}
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-\left|y_i-\widehat{y}_i\right|
-$$
+![Mean absolute error](assets/mae.png)
 
 
-$$
-\operatorname{RMSE}
-=
-\sqrt{
-\frac{1}{n}
-\sum_{i=1}^{n}
-\left(y_i-\widehat{y}_i\right)^2
-}
-$$
+![Root mean squared error](assets/rmse.png)
 
 
 and
 
 
-$$
-R^2
-=
-1-
-\frac{
-\sum_i \left(y_i-\widehat{y}_i\right)^2
-}{
-\sum_i \left(y_i-\bar{y}\right)^2
-}
-$$
+![Coefficient of determination](assets/r2.png)
 
 
 This time-series validation scheme is important because random cross-validation would allow future observations to contaminate the training sample.
@@ -354,11 +309,7 @@ z_MidvsSet_histo_q85
 Conceptually, for spread `s`, minute `m`, and quantile level `alpha`,
 
 
-$$
-\widehat{q}_{\alpha,s,m}
-=
-\inf \left\{ x \in \mathbb{R} : \widehat{F}_{s,m}(x) \ge \alpha \right\}
-$$
+![Empirical intraday quantile](assets/empirical_quantile.png)
 
 
 The motivation is that the distribution of the spread-to-settlement signal is strongly time dependent. The execution thresholds are therefore conditioned on the minute of day rather than assumed constant throughout the session.
@@ -374,17 +325,13 @@ This script converts settlement forecasts into an execution policy.
 For each observation, the model predicts
 
 
-```text
-S_hat_T.
-```
+![Settlement forecast](assets/settlement_forecast.png)
 
 
 The current spread is compared with that predicted terminal value through
 
 
-$$
-z_t = \frac{S_t - \widehat{S}_T}{\widehat{\sigma}_t}
-$$
+![Standardized execution signal](assets/zscore_signal.png)
 
 
 where `sigma_hat_t` is an intraday rolling volatility estimate.
