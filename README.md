@@ -167,13 +167,15 @@ Main engineered variables:
 The cyclical time variables are defined as:
 
 $$
-\text{minute\_sin}_t =
-\sin\left(2\pi \frac{m_t}{1440}\right),
+\mathrm{minute\_sin}_t
+=
+\sin\left(2\pi \frac{m_t}{1440}\right)
 $$
 
 $$
-\text{minute\_cos}_t =
-\cos\left(2\pi \frac{m_t}{1440}\right),
+\mathrm{minute\_cos}_t
+=
+\cos\left(2\pi \frac{m_t}{1440}\right)
 $$
 
 where $m_t$ is the minute of the day.
@@ -325,9 +327,9 @@ z_MidvsSet_histo_q85
 Conceptually, for spread $s$, minute $m$, and quantile level $\alpha$,
 
 $$
-\widehat q_{\alpha,s,m}
+\widehat{q}_{\alpha,s,m}
 =
-\inf\left\{x:\widehat F_{s,m}(x)\geq \alpha\right\}.
+\inf \left\{ x \mid \widehat{F}_{s,m}(x) \ge \alpha \right\}
 $$
 
 The motivation is that the distribution of the spread-to-settlement signal is strongly time dependent. The execution thresholds are therefore conditioned on the minute of day rather than assumed constant throughout the session.
