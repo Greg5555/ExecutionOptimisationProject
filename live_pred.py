@@ -23,19 +23,10 @@ import pandas as pd
 import joblib
 from pandas import to_datetime
 from datetime import datetime, timedelta
-sys.path.append('Z:\EQD\SGI\SGIPython\Pycharm')
-_path_folder = os.path.dirname(os.path.abspath(inspect.getframeinfo(inspect.currentframe()).filename))
-from FIND.Holiday.holiday_function import get_holiday
-from pandas.tseries.offsets import CustomBusinessDay
 
-nyse_holiday = get_holiday('NYSE')
-index_holiday = get_holiday('NYSE')
-index_holiday.append(pd.to_datetime('2012-10-29'))  # sandy
-index_holiday.append(pd.to_datetime('2012-10-30'))  # sandy
-index_holiday.append(pd.to_datetime('2018-12-05'))  # George W Bush
 index_CustomBusinessDay = CustomBusinessDay(holidays=index_holiday)
 
-import carambar as bbg
+import bbg
 from pytz import timezone
 from bloomberg_client.local_bloomberg_client import LocalBloombergClient as LBC
 bbg2 = LBC()
@@ -45,13 +36,13 @@ bbg2 = LBC()
 ############################################################
 # Configuration / constantes
 ##############################################################
-DEFAULT_MODEL_PATH = r"X:\EQD\New_SGI\Scripts\CTY Project\Pred_Models\GradHistBoost_model1.joblib"
+DEFAULT_MODEL_PATH = r".\Pred_Models\GradHistBoost_model1.joblib"
 
 NY_TZ = ZoneInfo("America/New_York")
 utc_tz = timezone('UTC')
 local_tz = timezone('America/New_York')
 
-HISTO_Z_DATA = r"X:\EQD\New_SGI\Scripts\CTY Project\Stats\HistoStats\Z_HistoLevels.csv"
+HISTO_Z_DATA = r".\HistoStats\Z_HistoLevels.csv"
 
 CAT_COLS = ["spread_id", "commodity"]
 NUM_COLS = [
@@ -62,7 +53,7 @@ NUM_COLS = [
 ]
 FEATS = CAT_COLS + NUM_COLS
 
-closing = r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\ExpiByContract_closeCommo\close_commo.xlsx"
+closing = r".\ExpiByContract_closeCommo\close_commo.xlsx"
 df_closing = pd.read_excel(closing)
 dic_closing = dict(zip(df_closing['commo'], df_closing['close']))
 
@@ -468,7 +459,7 @@ class LiveMonitorWindow(tk.Toplevel):
 
 class PredictApp(tk.Tk):
 
-    MODEL_DIR = r"X:\EQD\New_SGI\Scripts\CTY Project\Pred_Models"
+    MODEL_DIR = r".\CTY Project\Pred_Models"
 
     def __init__(self):
         super().__init__()
@@ -613,12 +604,7 @@ class PredictApp(tk.Tk):
             return
 
         try:
-            get_ticker_bbg(spread)
-        except ValueError as e:
-            messagebox.showerror("Spread format error", str(e))
-            return
-
-        self.lbl_status.config(text=f"Opening live monitor for {spread} ({side})…")
+            ge:bl_status.config(text=f"Opening live monitor for {spread} ({side})…")
         LiveMonitorWindow(
             parent=self,
             pipe=self.pipe,
