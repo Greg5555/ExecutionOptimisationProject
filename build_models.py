@@ -26,7 +26,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 
 
-DATA_DIR = r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\Files4strat\ML_tables\ML_tables_processed"
+DATA_DIR = r".\ML_tables_processed"
 TARGET = "Today_settlementPX_spread"
 
 CAT_COLS = ["spread_id", "commodity"]
@@ -294,7 +294,7 @@ def walk_forward_eval_multi(df_lite: pd.DataFrame,
     return pd.DataFrame(out_rows).sort_values("R2", ascending=False).reset_index(drop=True)
 
 
-MODEL_DIR = r"X:\EQD\New_SGI\Scripts\CTY Project\Pred_Models"
+MODEL_DIR = r".\Pred_Models"
 
 def sanitize_name(name: str) -> str:
     return re.sub(r'[^A-Za-z0-9._-]+', '_', name)
