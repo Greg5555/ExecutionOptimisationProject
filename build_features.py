@@ -50,8 +50,6 @@ def extract_name_spread(spread):
         return "UNK"
 
 
-List_spreadname= ['CLFCLH', 'CLGCLH', 'CLGCLM', 'CLHCLJ', 'CLHCLK', 'CLHCLM', 'CLHCLN', 'CLHCLZ', 'CLJCLN', 'CLJCLK', 'CLJCLQ', 'CLJCLZ', 'CLKCLM', 'CLKCLN', 'CLKCLQ', 'CLKCLU', 'CLMCLU', 'CLMCLN', 'CLMCLV', 'CLMCLM', 'CLNCLV', 'CLNCLU', 'CLNCLQ', 'CLNCLX', 'CLNCLM', 'CLQCLU', 'CLQCLX', 'CLQCLM', 'CLQCLZ', 'CLUCLF', 'CLUCLZ', 'CLUCLV', 'CLUCLX', 'CLUCLM', 'CLVCLF', 'CLVCLX', 'CLVCLG', 'CLVCLM', 'CLXCLG', 'CLXCLF', 'CLXCLZ', 'CLXCLH', 'CLXCLM', 'CLZCLH', 'CLZCLF', 'CLZCLJ', 'FCFFCH', 'FCHFCK', 'FCHFCJ', 'FCHFCQ', 'FCJFCK', 'FCJFCQ', 'FCKFCQ', 'FCQFCV', 'FCQFCU', 'FCQFCX', 'FCUFCV', 'FCUFCF', 'FCVFCX', 'FCXFCF', 'FCXFCH', 'NGFNGH', 'NGGNGH', 'NGGNGK', 'NGHNGK', 'NGHNGJ', 'NGHNGM', 'NGHNGU', 'NGJNGK', 'NGJNGN', 'NGKNGM', 'NGKNGN', 'NGKNGQ', 'NGMNGU', 'NGMNGN', 'NGNNGQ', 'NGNNGV', 'NGNNGU', 'NGQNGX', 'NGQNGU', 'NGUNGH', 'NGUNGZ', 'NGUNGV', 'NGUNGX', 'NGVNGF', 'NGVNGX', 'NGXNGG', 'NGXNGF', 'NGXNGZ', 'NGZNGF', 'LHGLHM', 'LHJLHQ', 'LHJLHN', 'LHJLHM', 'LHMLHN', 'LHMLHQ', 'LHMLHV', 'LHNLHV', 'LHNLHQ', 'LHQLHZ', 'LHQLHV', 'LHVLHG', 'LHVLHZ', 'LHVLHJ', 'LHZLHN', 'LHZLHJ', 'LHZLHG', 'LHZLHM', 'LCGLCJ', 'LCJLCQ', 'LCJLCM', 'LCMLCV', 'LCMLCQ', 'LCQLCZ', 'LCQLCG', 'LCQLCV', 'LCVLCG', 'LCVLCZ', 'LCZLCJ', 'LCZLCG', 'QSFQSG', 'QSFQSJ', 'QSFQSH', 'QSGQSH', 'QSGQSK', 'QSHQSJ', 'QSHQSK', 'QSHQSM', 'QSJQSK', 'QSJQSN', 'QSKQSM', 'QSKQSQ', 'QSKQSN', 'QSKQSX', 'QSMQSN', 'QSMQSU', 'QSNQSQ', 'QSNQSV', 'QSNQSX', 'QSNQSU', 'QSQQSU', 'QSQQSX', 'QSUQSV', 'QSUQSZ', 'QSUQSX', 'QSVQSF', 'QSVQSX', 'QSXQSH', 'QSXQSG', 'QSXQSZ', 'QSXQSF', 'QSZQSF', 'QSZQSH', 'KWHKWN', 'KWHKWK', 'KWKKWU', 'KWKKWN', 'KWNKWZ', 'KWNKWU', 'KWNKWH', 'KWUKWH', 'KWUKWZ', 'KWUKWK', 'KWZKWK', 'KWZKWH', 'KWZKWN', 'KCHKCU', 'KCHKCN', 'KCHKCK', 'KCKKCN', 'KCKKCU', 'KCNKCU', 'KCNKCZ', 'KCUKCZ', 'KCZKCK', 'KCZKCH', 'KCZKCN', 'GCGGCJ', 'GCGGCM', 'GCJGCQ', 'GCJGCM', 'GCMGCQ', 'GCMGCZ', 'GCQGCG', 'GCQGCZ', 'GCZGCJ', 'GCZGCG', 'SFSH', 'SHSK', 'SHSN', 'SKSN', 'SKSX', 'SNSF', 'SNSX', 'SXSH', 'SXSF', 'SXSK', 'SBHSBK', 'SBHSBN', 'SBHSBV', 'SBKSBV', 'SBKSBN', 'SBNSBK', 'SBNSBV', 'SBVSBN', 'SBVSBH', 'SIHSIK', 'SIHSIN', 'SIKSIU', 'SIKSIN', 'SINSIU', 'SINSIZ', 'SIUSIH', 'SIUSIZ', 'SIZSIK', 'SIZSIH', 'CTHCTK', 'CTHCTN', 'CTKCTN', 'CTKCTZ', 'CTNCTZ', 'CTZCTK', 'CTZCTN', 'CTZCTH', 'COFCOK', 'COFCOH', 'COFCOG', 'COHCOJ', 'COHCOK', 'COJCOK', 'COKCOM', 'COKCOU', 'COKCON', 'COMCON', 'CONCOX', 'CONCOQ', 'CONCOU', 'COQCOU', 'COUCOF', 'COUCOV', 'COUCOX', 'COVCOX', 'COXCOZ', 'COXCOF', 'COZCOF', 'CHCK', 'CHCN', 'CHCU', 'CKCU', 'CKCN', 'CNCN', 'CNCU', 'CNCZ', 'CUCZ', 'CZCH', 'CZCN', 'CCHCCK', 'CCHCCN', 'CCKCCU', 'CCKCCN', 'CCNCCU', 'CCUCCZ', 'CCZCCH', 'WHWK', 'WHWN', 'WKWU', 'WKWN', 'WKWZ', 'WNWU', 'WNWZ', 'WNWH', 'WUWZ', 'WUWK', 'WZWH', 'WZWN', 'BOFBOH', 'BOHBOK', 'BOKBON', 'BONBOZ', 'BOZBOF', 'SMFSMH', 'SMHSMK', 'SMKSMN', 'SMNSMZ', 'SMZSMF']
-
 def process_file(filepath):
     try:
         df_ML = pd.read_csv(filepath)
@@ -78,7 +76,7 @@ def process_file(filepath):
         df_ML.sort_values(["spread_id", "ts"]).reset_index(drop=True)
 
 
-        out_path = Path(r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\Files4strat\ML_tables\ML_tables_processed")
+        out_path = Path(r".\ML_tables_processed")
         os.makedirs(out_path, exist_ok=True)
         output_path = os.path.join(out_path, os.path.basename(filepath))
         df_ML.to_csv(output_path, index=False)
@@ -92,7 +90,7 @@ def process_file(filepath):
 
 if __name__ == "__main__":
 
-    folder_path = r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\Files4strat\ML_tables\ML_tables_processed"
+    folder_path = r".\ML_tables_processed"
     csv_files = glob.glob(os.path.join(folder_path, "*.csv"))
 
     print(f"Found {len(csv_files)} CSV files to process")
