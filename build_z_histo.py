@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-file = r"X:\EQD\New_SGI\Scripts\CTY Project\Stats\HistoStats\df_consolide_stats.csv"
+file = r".\df_consolide_stats.csv"
 
 df = pd.read_csv(file)
 df = df.replace([np.inf, -np.inf], np.nan).dropna()
@@ -34,13 +34,13 @@ z_histo_levels = (
 )
 
 
-z_histo_levels.to_csv(r"X:\EQD\New_SGI\Scripts\CTY Project\Stats\HistoStats\Z_HistoLevels.csv", index=False)
+z_histo_levels.to_csv(r".\Z_HistoLevels.csv", index=False)
 
 
 ##VISU
-df_histo_zspread = pd.read_csv(r"C:\Users\gchaucho080425\Documents\Memoire\Code\HistoStats\Z_HistoLevels.csv")
+df_histo_zspread = pd.read_csv(r".\Z_HistoLevels.csv")
 
-OUTPUT_DIR = r"C:\Users\gchaucho080425\Documents\Memoire\Code\HistoStats\visu_z_histo"
+OUTPUT_DIR = r".\visu_z_histo"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 Z_COLS = [
