@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 
 #############################
 
-HISTO_Z_SPREAD = r"X:\EQD\New_SGI\Scripts\CTY Project\Stats\HistoStats\Z_HistoLevels.csv"
-DATA_DIR = r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\Files4strat\ML_tables\ML_tables_processed"
-MODEL_DIR = Path(r"X:\EQD\New_SGI\Scripts\CTY Project\Pred_Models")
+HISTO_Z_SPREAD = ".\Z_HistoLevels.csv"
+DATA_DIR = r".\ML_tables_processed"
+MODEL_DIR = Path(r".\Pred_Models")
 TARGET = "Today_settlementPX_spread"
 
 CAT_COLS = ["spread_id", "commodity"]
@@ -257,7 +257,7 @@ if __name__ == "__main__":
     model_dir = MODEL_DIR
     list_models = sorted(str(p) for p in model_dir.glob("*.joblib"))
 
-    OUTPUT_DIR = Path(rf"X:\EQD\New_SGI\Scripts\CTY Project\Backtest_results\{commo}")
+    OUTPUT_DIR = Path(rf".\Backtest_results\{commo}")
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
