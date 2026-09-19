@@ -23,8 +23,8 @@ from collections import Counter
 
 import joblib
 
-DATA_DIR = r"X:\EQD\New_SGI\Scripts\CTY Project\Intraday_Data\Files4strat\ML_tables\ML_tables_processed"
-MODEL_PATH = r"X:\EQD\New_SGI\Scripts\CTY Project\Pred_Models\GradHistBoost_model4.joblib"
+DATA_DIR = "..."
+MODEL_PATH = "..."
 TARGET = "Today_settlementPX_spread"
 
 CAT_COLS = ["spread_id", "commodity"]
