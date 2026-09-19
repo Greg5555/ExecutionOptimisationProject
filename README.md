@@ -18,7 +18,6 @@ The framework combines:
 5. **Backtesting against a late-session TWAP benchmark**
 6. **A live monitoring prototype for real-time execution signals**
 
-The code was developed in the context of a V.I.E. at **Société Générale, New York**, and accompanies the ENSAE Paris professional thesis.
 
 ---
 
@@ -628,37 +627,7 @@ The results should therefore be interpreted as a **research execution-price back
 
 ---
 
-# 13. Suggested Public GitHub Cleanup
-
-The original research code was developed inside a banking environment.
-
-Before making the repository public, remove or replace:
-
-- internal network paths;
-- usernames or workstation paths;
-- proprietary package names when disclosure is restricted;
-- Bloomberg credentials or configuration;
-- internal server names;
-- proprietary datasets;
-- internal ticker mappings if confidential;
-- saved production models trained on proprietary data.
-
-A cleaner public structure could use a central configuration file:
-
-```python
-# config.py
-
-DATA_DIR = "./data/processed"
-MODEL_DIR = "./models"
-RESULTS_DIR = "./results"
-HISTO_Z_PATH = "./data/z_score_quantiles.csv"
-```
-
-This makes the repository portable and avoids exposing internal infrastructure.
-
----
-
-# 14. Limitations and Extensions
+# 13. Limitations and Extensions
 
 Possible extensions include:
 
@@ -677,7 +646,7 @@ Possible extensions include:
 
 ---
 
-# 15. Academic Context
+# 14. Academic Context
 
 This project was developed as part of the **ENSAE Paris Specialized Master's professional thesis**.
 
@@ -690,11 +659,13 @@ The academic report develops the statistical methodology, model validation, empi
 
 # Disclaimer
 
-This repository is provided for **academic and research purposes only**.
+This repository is provided for academic, educational and portfolio purposes only.
 
-It does not constitute investment advice, a trading recommendation, or a production trading system.
+The work was developed as part of an academic research project and has been adapted for public presentation. No proprietary Société Générale data, confidential information, credentials, internal documentation or production trading infrastructure are included.
 
-Any public version of this repository should contain only code, data and documentation that are authorized for external disclosure.
+The code and methodology presented here are the author's work unless otherwise stated. The repository does not constitute investment advice, a trading recommendation or a production trading system.
+
+© 2026 Grégoire Chauchot. All rights reserved.
 
 ---
 
