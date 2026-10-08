@@ -17,29 +17,6 @@ from pathlib import Path
 np.seterr(all="ignore")
 
 
-
-# def hhmmss_to_seconds(x):
-#     try:
-#         if pd.isna(x): return np.nan
-#         h, m, s = str(x).split(':'); return int(h)*3600 + int(m)*60 + float(s)
-#     except Exception:
-#         return np.nan
-#
-#
-# def add_calendar_features(df: pd.DataFrame, ts_col: str) -> pd.DataFrame:
-#     """Ajoute minute-of-day, sin/cos, jour de semaine (dow)."""
-#     d = df.copy()
-#     d[ts_col] = pd.to_datetime(d[ts_col], errors='coerce')
-#     minute = d[ts_col].dt.hour * 60 + d[ts_col].dt.minute
-#     d['minute_of_day'] = minute
-#     d['minute_sin'] = np.sin(2*np.pi*minute/1440.0)
-#     d['minute_cos'] = np.cos(2*np.pi*minute/1440.0)
-#     d['dow'] = d[ts_col].dt.dayofweek
-#     return d
-
-
-
-# ---------- Chargement ----------
 def extract_name_spread(spread):
     try:
         parts = spread.split('-')
@@ -59,7 +36,7 @@ def process_file(filepath):
         df_ML = df_ML.replace([np.inf, -np.inf], np.nan)
         df_ML = df_ML.apply(lambda col: col.fillna(col.mean()) if col.dtype.kind in "fc" else col)
 
-        df_ML = df[['#DATETIME','minute_of_day','minute_sin','minute_cos','dow','time2closing','Commo','unique_Contract','BEST_ASIZ1','Mid','BEST_BSIZ1','BA_spread_%','lastBD_settlementPX_spread','Today_settlementPX_spread']].copy()
+        df_ML = df_ML[['#DATETIME','minute_of_day','minute_sin','minute_cos','dow','time2closing','Commo','unique_Contract','BEST_ASIZ1','Mid','BEST_BSIZ1','BA_spread_%','lastBD_settlementPX_spread','Today_settlementPX_spread']].copy()
         df_ML["ts"] = pd.to_datetime(df_ML["#DATETIME"])
         df_ML["date"] = df_ML["ts"].dt.date
         df_ML["spread_id"] = df_ML.get("unique_Contract", Path(filepath).stem)
