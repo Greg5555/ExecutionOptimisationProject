@@ -16,7 +16,6 @@ The framework combines:
 3. **Historical intraday z-score calibration**
 4. **Signal-based execution rules**
 5. **Backtesting against a late-session TWAP benchmark**
-6. **A live monitoring prototype for real-time execution signals**
 
 
 ---
@@ -78,8 +77,6 @@ In plain terms:
 ├── HistoGradientBoost.py
 ├── build_z_histo.py
 ├── backtest.py
-├── live_pred.py
-├── CUSTOM_TRANSFO.py
 │
 ├── data/
 │   └── ...
@@ -90,7 +87,6 @@ In plain terms:
 └── README.md
 ```
 
-The folder names above are a recommended public GitHub structure. The original research scripts contain local/internal paths and need to be adapted before running outside the original environment.
 
 ---
 
@@ -132,10 +128,6 @@ Processed ML tables
                        ▼
               Performance analysis
 
-Optional production prototype:
-                       │
-                       ▼
-                 live_pred.py
 ```
 
 ---
@@ -275,10 +267,6 @@ The trained pipeline can be serialized with `joblib` and later consumed by the b
 ---
 
 # 4. Custom Transformers
-
-## `CUSTOM_TRANSFO.py`
-
-This module contains reusable preprocessing components.
 
 ### `RareCategoryGrouper`
 
@@ -439,45 +427,6 @@ Typical performance analysis includes:
 - best day;
 - worst day.
 
----
-
-# 8. Live Signal Prototype
-
-## `live_pred.py`
-
-`live_pred.py` is a graphical prototype showing how the trained model and historical thresholds can be used in real time.
-
-The application:
-
-1. loads a serialized `.joblib` model;
-2. accepts a spread, commodity and BUY/SELL side;
-3. retrieves current market information;
-4. rebuilds the model features;
-5. predicts the settlement spread;
-6. estimates recent intraday volatility;
-7. computes the live z-score;
-8. retrieves the corresponding historical intraday quantiles;
-9. displays a qualitative signal.
-
-Possible outputs include:
-
-```text
-STRONG BUY
-SOLID BUY
-BUY
-NO SIGNAL
-SELL
-SOLID SELL
-STRONG SELL
-```
-
-The monitor refreshes automatically at regular intervals.
-
-### Important
-
-The live script relies on internal market-data infrastructure and Bloomberg-related modules that are not part of this public repository. It is therefore included primarily to document the architecture of the live prototype.
-
----
 
 # 9. Data
 
@@ -500,9 +449,6 @@ time-of-day features
 relative-price features
 ```
 
-Because the underlying market dataset is proprietary, **raw data are not distributed in this repository**.
-
-A small anonymized or synthetic sample can be added to illustrate the expected schema.
 
 ---
 
@@ -522,127 +468,18 @@ tqdm
 pytz
 ```
 
-The live application also uses:
-
-```text
-tkinter
-zoneinfo
-```
-
-plus internal/proprietary market-data packages.
-
-A minimal installation for the research and backtest components is:
-
-```bash
-pip install numpy pandas scipy scikit-learn joblib matplotlib tqdm pytz
-```
-
----
-
-# 11. Running the Research Pipeline
-
-The scripts currently use project-specific directory constants. Before running them on another machine, replace paths such as:
-
-```python
-DATA_DIR = "..."
-MODEL_DIR = "..."
-HISTO_Z_SPREAD = "..."
-```
-
-with local paths.
-
-A typical workflow is:
-
-### Step 1 — Prepare features
-
-```bash
-python build_features.py
-```
-
-### Step 2 — Estimate historical intraday thresholds
-
-```bash
-python build_z_histo.py
-```
-
-### Step 3 — Train and compare models
-
-```bash
-python build_models.py
-```
-
-### Step 4 — Train Histogram Gradient Boosting
-
-```bash
-python HistoGradientBoost.py
-```
-
-### Step 5 — Run the execution backtest
-
-```bash
-python backtest.py
-```
-
-### Step 6 — Optional live prototype
-
-```bash
-python live_pred.py
-```
-
-The live step requires access to the original internal data infrastructure.
-
----
-
-# 12. Reproducibility Notes
-
-Several precautions are important when reproducing or extending the results.
-
-### Time-series validation
-
-Training and test sets should always be separated chronologically.
-
-### Avoiding look-ahead bias
-
-Any variable used at time `t` must be observable at time `t`.
-
-In particular:
-
-- preprocessing parameters should be estimated on the training period;
-- historical quantile thresholds should only use information available before the test period;
-- production backtests should ideally use predictions generated from rolling out-of-sample models rather than models refitted on the complete historical sample.
-
-### Execution assumptions
-
-The current backtest approximates executable prices using reconstructed bid and ask levels.
-
-It does not fully model:
-
-- queue position;
-- partial fills;
-- exchange fees;
-- nonlinear market impact;
-- order-book depth beyond displayed liquidity.
-
-The results should therefore be interpreted as a **research execution-price backtest**, not as a complete exchange simulator.
-
----
 
 # 13. Limitations and Extensions
 
 Possible extensions include:
 
-- strict rolling out-of-sample execution backtests;
 - transaction-cost and market-impact modelling;
 - bootstrap confidence intervals for execution improvement;
 - Diebold-Mariano tests for forecast comparison;
-- block-bootstrap inference for daily P&L;
 - regime-dependent quantiles;
 - volatility-scaled execution sizes;
 - direct quantile regression;
 - probabilistic settlement forecasts;
-- online model updating;
-- reinforcement-learning or optimal-control formulations;
-- joint optimization of execution timing and quantity.
 
 ---
 
@@ -658,8 +495,6 @@ The academic report develops the statistical methodology, model validation, empi
 ---
 
 # Disclaimer
-
-This repository is provided for academic, educational and portfolio purposes only.
 
 The work was developed as part of an academic research project and has been adapted for public presentation. No proprietary Société Générale data, confidential information, credentials, internal documentation or production trading infrastructure are included.
 
