@@ -12,9 +12,6 @@ import pandas as pd
 import numpy as np
 
 def cast_float32(X):
-    """
-    Cast les colonnes numériques en float32 (sans casser les catégorielles).
-    """
     if isinstance(X, pd.DataFrame):
         num_cols = X.select_dtypes(include=[np.number]).columns
         X = X.copy()
