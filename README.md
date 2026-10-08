@@ -428,7 +428,7 @@ Typical performance analysis includes:
 - worst day.
 
 
-# 9. Data
+# 8. Data
 
 The original research dataset consists of minute-level observations of commodity futures calendar spreads.
 
@@ -452,7 +452,7 @@ relative-price features
 
 ---
 
-# 10. Dependencies
+# 9. Dependencies
 
 Core open-source dependencies include:
 
@@ -469,7 +469,7 @@ pytz
 ```
 
 
-# 13. Limitations and Extensions
+# 10. Limitations and Extensions
 
 Possible extensions include:
 
@@ -483,7 +483,7 @@ Possible extensions include:
 
 ---
 
-# 14. Academic Context
+# 11. Academic Context
 
 This project was developed as part of the **ENSAE Paris Specialized Master's professional thesis**.
 
