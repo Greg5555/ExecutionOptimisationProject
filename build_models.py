@@ -266,11 +266,15 @@ def walk_forward_eval_multi(df_lite: pd.DataFrame,
     outer_iters = range(train_days, len(dates) - test_days)
     for i in tqdm(outer_iters, desc="Walk-forward", unit="window"):
 
+        cutoffs = compute_cutoffs_on_train(tr, EXTREME_COLS, q=0.99)
+        tr = apply_cutoffs_clip(tr, cutoffs)
+        te = apply_cutoffs_clip(te, cutoffs)
+        
         tr_dates = dates[i - train_days:i]
         te_dates = dates[i:i + test_days]
         tr = df_lite[df_lite["date"].isin(tr_dates)]
         te = df_lite[df_lite["date"].isin(te_dates)]
-
+        
         X_tr, y_tr = tr[feats], tr[TARGET]
         X_te, y_te = te[feats], te[TARGET]
 
