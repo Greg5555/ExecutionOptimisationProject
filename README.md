@@ -496,7 +496,7 @@ The academic report develops the statistical methodology, model validation, empi
 
 # Disclaimer
 
-The work was developed as part of an academic research project and has been adapted for public presentation. No proprietary Société Générale data, confidential information, credentials, internal documentation or production trading infrastructure are included.
+The work was developed as part of an academic research project and has been adapted for public presentation. No proprietary data, confidential information, credentials, internal documentation or production trading infrastructure are included.
 
 The code and methodology presented here are the author's work unless otherwise stated. The repository does not constitute investment advice, a trading recommendation or a production trading system.
 
